@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fff7fa">
+<title>shary的工作台 · 个人目标工作台</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+ <aside class="sidebar" id="sidebar">
+  <a class="brand" href="#home"><span class="brand-mark">☀</span><span><b>shary的工作台</b><small>慢慢来，也会到达</small></span></a>
+  <div class="nav-label">工作台</div><nav id="main-nav">
+   <button class="nav-item active" data-view="home"><i>⌂</i>首页</button><button class="nav-item" data-view="daily"><i>☀</i>每日计划</button>
+   <button class="nav-item" data-view="calendar"><i>▦</i>日历与日程</button><button class="nav-item" data-view="tasks"><i>✓</i>任务管理 <em id="nav-count"></em></button>
+   <button class="nav-item" data-view="goals"><i>◎</i>目标与项目</button><button class="nav-item" data-view="habits"><i>◉</i>习惯打卡</button><button class="nav-item" data-view="reviews"><i>✎</i>复盘记录</button>
+  </nav><div class="nav-label nav-lower">管理</div><nav><button class="nav-item" data-view="backup"><i>⇧</i>数据备份</button><button class="nav-item" data-view="settings"><i>⚙</i>设置</button></nav>
+  <div class="side-note"><span>✧</span><p>把重要的事放在心上，<br>也放进今天的计划里。</p><small>一点一点，向目标靠近</small></div>
+  <div class="profile"><span class="avatar">S</span><span>shary<small>仅保存在此浏览器</small></span><b></b></div>
+ </aside>
+ <div class="scrim" id="scrim"></div>
+ <main class="main">
+  <header class="topbar"><button class="icon-button menu" id="menu-toggle" aria-label="打开导航">☰</button><div class="crumb">shary的工作台 <span>/</span> <strong id="crumb-title">首页</strong></div>
+   <div class="top-actions"><label class="search"><span>⌕</span><input id="global-search" type="search" placeholder="搜索任务、目标或项目…"><kbd>⌘ K</kbd></label><button class="icon-button" id="quick-add" title="快速新建">＋</button><button class="today-chip" id="today-chip">▦ <span id="today-label"></span></button></div>
+  </header>
+  <section id="view-root" class="view-root"></section><footer class="footer"><span>☀ shary的工作台</span><span>今天也为自己留一点时间</span><span id="save-state">数据已保存在本机</span></footer>
+ </main>
+</div>
+<div class="toast-region" id="toast-region" aria-live="polite"></div><div class="modal-backdrop" id="modal-backdrop" hidden><section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"></section></div>
+<script src="script.js"></script>
+</body></html>
+
