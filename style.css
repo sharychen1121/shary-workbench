@@ -155,3 +155,100 @@ kbd{font-size:11px;color:#74665c}
   .footer{font-size:12px}
 }
 
+
+/* 高可读性字体：明显放大并加重信息文字 */
+body{font-size:18px;line-height:1.7}
+.brand b{font-size:20px;font-weight:800}
+.brand small,.profile small{font-size:14px;color:#65564a}
+.nav-label{font-size:14px;font-weight:750;color:#65564a}
+.nav-item{font-size:17px;font-weight:650;color:#57483c;padding-top:12px;padding-bottom:12px}
+.nav-item.active{font-weight:800}
+.nav-item i{font-size:20px}
+.nav-item em{font-size:13px}
+.side-note{color:#695337}
+.side-note p{font-size:15px;font-weight:650}
+.side-note small{font-size:13px;color:#65564a}
+.profile{font-size:15px;font-weight:700}
+.crumb{font-size:16px;color:#65564a}
+.crumb strong{font-size:17px;font-weight:800}
+.search input{font-size:15px}
+kbd{font-size:12px;color:#65564a}
+.today-chip{font-size:15px;font-weight:700;color:#65564a}
+.heading h1{font-size:36px;font-weight:800}
+.heading p{font-size:17px;color:#65564a}
+.eyebrow{font-size:14px;font-weight:750;color:#8d5d2c}
+.btn{font-size:16px;font-weight:750;padding:10px 15px}
+.stat-top{font-size:15px;font-weight:750;color:#65564a}
+.stat-icon{font-size:17px}
+.stat-num{font-size:36px;font-weight:800}
+.stat-foot{font-size:14px;color:#65564a;font-weight:550}
+.card-head h2,.card-head h3{font-size:19px;font-weight:800}
+.card-head p{font-size:15px;color:#65564a}
+.link{font-size:15px;font-weight:750}
+.greeting h2{font-size:27px;font-weight:800}
+.greeting p{font-size:16px;color:#65564a}
+.thing{padding:11px}
+.thing b{font-size:14px;font-weight:800}
+.thing input{font-size:15px;color:#49382e;font-weight:650}
+.row-title{font-size:16px;color:#49382e;font-weight:750}
+.row-sub{font-size:14px;color:#65564a;font-weight:550}
+.priority,.pill{font-size:14px;font-weight:750}
+.progress-caption{font-size:14px;color:#65564a;font-weight:600}
+.project-top{font-size:15px;font-weight:700}
+.empty{font-size:16px;color:#65564a}
+.habit-dot{font-size:14px;font-weight:700}
+.toolbar input,.toolbar select,.field input,.field textarea,.field select{font-size:16px}
+.field label{font-size:15px;font-weight:750;color:#57483c}
+.table th{font-size:14px;font-weight:750;color:#65564a}
+.table td{font-size:15px;color:#57483c}
+.table-title{font-weight:800}
+.small-action{font-size:14px}
+.calendar-month{font-size:21px;font-weight:800}
+.calendar-controls button{font-size:17px}
+.weekday{font-size:14px;font-weight:750;color:#65564a}
+.day-num{font-size:14px;font-weight:750;color:#57483c}
+.day-event{font-size:12px;color:#65564a}
+.goal-card h3,.habit-card h3{font-size:19px;font-weight:800}
+.goal-card p,.habit-card p{font-size:15px;color:#65564a}
+.goal-meta{font-size:14px}
+.habit-week span{font-size:12px;font-weight:750}
+.switcher button{font-size:14px;font-weight:750}
+.history-entry strong{font-size:15px;font-weight:800}
+.history-entry p{font-size:14px;color:#65564a}
+.modal-head h2{font-size:21px;font-weight:800}
+.modal-close{font-size:21px}
+.toast{font-size:16px;font-weight:700}
+.footer{font-size:14px;color:#65564a}
+.subheading{font-size:16px;font-weight:800;color:#57483c}
+.muted{color:#65564a}
+@media(max-width:760px){
+  body{font-size:17px}
+  .brand b{font-size:19px}
+  .brand small,.profile small{font-size:13px}
+  .nav-item{font-size:17px}
+  .view-root{padding:21px 13px 27px}
+  .crumb{font-size:13px}
+  .crumb strong{font-size:14px}
+  .heading h1{font-size:28px}
+  .heading p{font-size:15px}
+  .eyebrow{font-size:12px}
+  .btn{font-size:14px;padding:9px 11px}
+  .stat-top{font-size:13px}
+  .stat-num{font-size:29px}
+  .stat-foot{font-size:12px}
+  .card-head h2,.card-head h3{font-size:17px}
+  .card-head p{font-size:13px}
+  .greeting h2{font-size:22px}
+  .greeting p{font-size:14px}
+  .row-title{font-size:15px}
+  .row-sub{font-size:13px}
+  .day-cell{min-height:62px}
+  .weekday{font-size:12px}
+  .day-num{font-size:13px}
+  .day-event{font-size:10px}
+  .toolbar input,.toolbar select,.field input,.field textarea,.field select{font-size:16px}
+  .field label{font-size:14px}
+  .table td{font-size:14px}
+  .footer{font-size:13px}
+}
+
