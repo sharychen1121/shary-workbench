@@ -252,3 +252,91 @@ kbd{font-size:12px;color:#65564a}
   .footer{font-size:13px}
 }
 
+/* 全局易读性加强：浅色文字、表单与边线统一增强 */
+:root{--ink:#3f342d;--muted:#5e4d40;--line:#d8c3aa}
+body{font-size:20px;line-height:1.75;color:#3f342d}
+.brand b{font-size:21px;font-weight:850}
+.brand small,.profile small,.nav-label,.side-note small{font-size:15px!important;color:#5e4d40!important;font-weight:650}
+.nav-item{font-size:18px!important;color:#4f4034!important;font-weight:700}
+.nav-item.active{font-weight:850}
+.nav-item i{font-size:21px}
+.side-note p{font-size:16px;font-weight:700;color:#594835}
+.profile{font-size:16px;font-weight:750}
+.crumb{font-size:17px!important;color:#5e4d40!important}
+.crumb strong{font-size:18px!important;font-weight:850}
+.search input{font-size:16px!important;color:#3f342d}
+.today-chip{font-size:16px!important;font-weight:750;color:#4f4034}
+.heading h1{font-size:40px;font-weight:850}
+.heading p{font-size:18px!important;color:#5e4d40!important;font-weight:650}
+.eyebrow{font-size:15px!important;font-weight:800;color:#825221}
+.btn{font-size:17px!important;font-weight:800;border-width:1.5px}
+.stat-top{font-size:16px!important;font-weight:800;color:#5e4d40!important}
+.stat-num{font-size:38px;font-weight:850}
+.stat-foot{font-size:15px!important;font-weight:650;color:#5e4d40!important}
+.card-head h2,.card-head h3{font-size:20px!important;font-weight:850}
+.card-head p{font-size:16px!important;color:#5e4d40!important;font-weight:650}
+.link{font-size:16px!important;font-weight:800}
+.greeting h2{font-size:28px;font-weight:850}
+.greeting p{font-size:17px!important;color:#5e4d40!important;font-weight:650}
+.thing{border:2px solid #cdb395;background:#fffefd;padding:12px}
+.thing b{width:28px;height:28px;font-size:16px;font-weight:850;color:#854c1e;background:#fff0dc}
+.thing input{font-size:17px!important;font-weight:750!important;color:#3f342d!important}
+.row-title{font-size:17px!important;font-weight:800;color:#3f342d!important}
+.row-sub{font-size:15px!important;font-weight:650;color:#5e4d40!important}
+.priority,.pill{font-size:15px!important;font-weight:800}
+.progress{height:9px;border:1px solid #c7ae91}
+.progress-caption{font-size:15px!important;font-weight:700;color:#5e4d40!important}
+.project-top{font-size:16px!important;font-weight:750}
+.empty{font-size:17px!important;color:#5e4d40!important;font-weight:600}
+.habit-dot{font-size:15px!important;font-weight:750}
+.toolbar input,.toolbar select,.field input,.field textarea,.field select{font-size:17px!important;color:#3f342d;border:1.5px solid #cdb99f}
+.field label{font-size:16px!important;font-weight:800;color:#4f4034!important}
+.table th{font-size:15px!important;font-weight:800;color:#5e4d40!important}
+.table td{font-size:16px!important;color:#4f4034!important}
+.small-action{font-size:15px!important}
+.calendar-month{font-size:22px!important;font-weight:850}
+.weekday{font-size:15px!important;font-weight:800;color:#5e4d40!important}
+.day-num{font-size:15px!important;font-weight:800;color:#4f4034!important}
+.day-event{font-size:13px!important;color:#5e4d40!important;font-weight:650}
+.goal-card h3,.habit-card h3{font-size:20px!important;font-weight:850}
+.goal-card p,.habit-card p{font-size:16px!important;color:#5e4d40!important;font-weight:650}
+.habit-week span{font-size:13px!important;font-weight:800}
+.switcher button{font-size:15px!important;font-weight:800}
+.history-entry strong{font-size:16px!important;font-weight:850}
+.history-entry p{font-size:15px!important;color:#5e4d40!important;font-weight:650}
+.modal-head h2{font-size:22px!important;font-weight:850}
+.toast{font-size:17px!important;font-weight:750}
+.footer{font-size:15px!important;color:#5e4d40!important;font-weight:600;border-color:#d8c3aa}
+.subheading{font-size:17px!important;font-weight:850;color:#4f4034!important}
+.muted{color:#5e4d40!important}
+.card,.project-card{border-color:#d8c3aa;border-width:1.5px}
+.task-row,.simple-row,.project-mini{border-color:#d8c3aa}
+.toolbar input,.toolbar select,.field input,.field textarea,.field select,.search{border-color:#cdb99f}
+.day-cell{border-color:#e2d2be}
+.calendar-grid{gap:5px}
+@media(max-width:760px){
+ body{font-size:18px}
+ .nav-item{font-size:18px!important}
+ .heading h1{font-size:30px}
+ .heading p{font-size:16px!important}
+ .btn{font-size:15px!important}
+ .stat-top{font-size:14px!important}
+ .stat-num{font-size:31px}
+ .stat-foot{font-size:13px!important}
+ .card-head h2,.card-head h3{font-size:18px!important}
+ .card-head p{font-size:14px!important}
+ .greeting h2{font-size:23px}
+ .greeting p{font-size:15px!important}
+ .thing{padding:10px}
+ .thing input{font-size:16px!important}
+ .row-title{font-size:16px!important}
+ .row-sub{font-size:14px!important}
+ .day-cell{min-height:64px}
+ .weekday{font-size:13px!important}
+ .day-num{font-size:14px!important}
+ .day-event{font-size:10px!important}
+ .toolbar input,.toolbar select,.field input,.field textarea,.field select{font-size:16px!important}
+ .table td{font-size:15px!important}
+ .footer{font-size:14px!important}
+}
+
