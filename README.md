@@ -1,7 +1,5 @@
 # shary 的工作台
 
-个人目标与运动健康工作台。GitHub Pages 提供 HTML/CSS/JavaScript 前端；运动健康自动同步使用单独的 Cloudflare Worker + D1 后端和 iPhone HealthKit 配套 App。
+个人目标工作台和运动健康记录页。健康页支持在浏览器本地识别 iPhone「健康」截图，核对后保存活动能量、锻炼、站立、步数、距离、楼层、心率和训练摘要，并按周汇总。
 
-任务、目标、复盘与习惯保存在访问者当前浏览器的 localStorage。健康日汇总与训练摘要在用户授权后由 iPhone App 通过 HTTPS 写入 Cloudflare D1；网页通过同步密钥读取。健康同步部署步骤见 [SYNC_SETUP.md](SYNC_SETUP.md)，iPhone 项目位于 [ios/SharyHealthSync.xcodeproj](ios/SharyHealthSync.xcodeproj)。
-
-GitHub Pages 自动从 main 分支发布静态前端。Worker 与 iPhone App 需要分别配置和部署。
+健康截图和统计记录保存在使用该页面的当前浏览器中。识别程序与中文模型首次使用时从 jsDelivr 下载；图片识别在浏览器内完成，不上传图片。打开 [运动健康页](https://sharychen1121.github.io/shary-workbench/health-ocr.html) 开始使用。
