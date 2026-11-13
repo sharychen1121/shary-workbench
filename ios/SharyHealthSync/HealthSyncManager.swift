@@ -1,5 +1,6 @@
 import Foundation
 import HealthKit
+import Combine
 
 struct DailyHealth: Codable, Identifiable {
     var date: String
@@ -27,7 +28,9 @@ struct WorkoutSummary: Codable {
     @Published var isBusy = false
     @Published var lastSync = ""
     private let store = HKHealthStore()
-    private let tokenKey = "healthSyncToken"\n    private var observersInstalled = false\n    private var standHourKeys = Set<String>()
+    private let tokenKey = "healthSyncToken"
+    private var observersInstalled = false
+    private var standHourKeys = Set<String>()\n    private var observersInstalled = false\n    private var standHourKeys = Set<String>()
     var baseURL: String {
         get { UserDefaults.standard.string(forKey: "healthSyncBaseURL") ?? "" }
         set { UserDefaults.standard.set(newValue, forKey: "healthSyncBaseURL") }
@@ -102,6 +105,7 @@ struct WorkoutSummary: Codable {
         }
     }
     private func loadDailyRows(from first: Date, through end: Date) async -> [DailyHealth] {
+        standHourKeys.removeAll(keepingCapacity: true)
         let calendar = Calendar.current
         var map: [String: DailyHealth] = [:]
         func dayKey(_ date: Date) -> String {
@@ -142,7 +146,8 @@ struct WorkoutSummary: Codable {
         }
         if let stand = HKObjectType.categoryType(forIdentifier: .appleStandHour) {
             for sample in await categorySamples(stand, from: first, through: end) where sample.value == HKCategoryValueAppleStandHour.stood.rawValue {
-                let key = dayKey(sample.startDate)
+                let key = dayKey(sample.startDate), hourKey = key + String(Calendar.current.component(.hour, from: sample.startDate))
+                guard standHourKeys.insert(hourKey).inserted else { continue }
                 var row = map[key] ?? DailyHealth(date: key); row.standHours += 1; map[key] = row
             }
         }
