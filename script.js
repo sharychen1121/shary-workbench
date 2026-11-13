@@ -135,7 +135,9 @@
   $("#today-chip").addEventListener("click",()=>{selectedDay=today();month=new Date();view="calendar";render();});
   document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();$("#global-search").focus();}if(e.key==="Escape")closeModal();});
   $("#modal-backdrop").addEventListener("click",e=>{if(e.target.id==="modal-backdrop")closeModal();});
-  window.addEventListener("focus",()=>{if(view==="health"){healthLoadedRange="";refreshHealthData(true);}});\n  document.addEventListener("visibilitychange",()=>{if(!document.hidden&&view==="health"){healthLoadedRange="";refreshHealthData(true);}});\n  window.addEventListener("hashchange",()=>{const next=location.hash.slice(1);if(["home","daily","calendar","tasks","goals","habits","health","reviews","backup","settings"].includes(next)){view=next;render();}});
+  window.addEventListener("focus",()=>{if(view==="health"){healthLoadedRange="";refreshHealthData(true);}});
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden&&view==="health"){healthLoadedRange="";refreshHealthData(true);}});
+  window.addEventListener("hashchange",()=>{const next=location.hash.slice(1);if(["home","daily","calendar","tasks","goals","habits","health","reviews","backup","settings"].includes(next)){view=next;render();}});
   render();
 })();
 
