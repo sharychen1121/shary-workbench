@@ -30,7 +30,9 @@ struct WorkoutSummary: Codable {
     private let store = HKHealthStore()
     private let tokenKey = "healthSyncToken"
     private var observersInstalled = false
-    private var standHourKeys = Set<String>()\n    private var observersInstalled = false\n    private var standHourKeys = Set<String>()
+    private var standHourKeys = Set<String>()
+    private var observersInstalled = false
+    private var standHourKeys = Set<String>()
     var baseURL: String {
         get { UserDefaults.standard.string(forKey: "healthSyncBaseURL") ?? "" }
         set { UserDefaults.standard.set(newValue, forKey: "healthSyncBaseURL") }
@@ -63,8 +65,11 @@ struct WorkoutSummary: Codable {
             status = "已同步 · " + lastSync
         } catch { status = "同步失败：" + error.localizedDescription }
     }
-    func restoreStatus() { lastSync = UserDefaults.standard.string(forKey: "healthLastSync") ?? "" }\n    func resumeBackgroundDeliveryIfConfigured() { if !baseURL.isEmpty && !token.isEmpty { enableBackgroundUpdates() } }
+    func restoreStatus() { lastSync = UserDefaults.standard.string(forKey: "healthLastSync") ?? "" }
+    func resumeBackgroundDeliveryIfConfigured() { if !baseURL.isEmpty && !token.isEmpty { enableBackgroundUpdates() } }
     private func enableBackgroundUpdates() {
+        guard !observersInstalled else { return }
+        observersInstalled = true
         let types: [HKSampleType] = [
             HKObjectType.quantityType(forIdentifier: .stepCount),
             HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
