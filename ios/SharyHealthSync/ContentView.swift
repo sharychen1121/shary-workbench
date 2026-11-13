@@ -30,7 +30,7 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("shary 健康同步")
-            .onAppear { token = sync.token; sync.restoreStatus() }
+            .onAppear { token = sync.token; sync.restoreStatus(); sync.resumeBackgroundDeliveryIfConfigured() }
         }
     }
 }
