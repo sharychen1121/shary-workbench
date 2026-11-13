@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>CFBundleDisplayName</key><string>shary 健康同步</string>
+<key>NSHealthShareUsageDescription</key><string>读取活动能量、锻炼、站立、步数、距离、爬楼、心率和训练摘要，用于同步到你的个人工作台。</string>
+<key>NSHealthUpdateUsageDescription</key><string>本 App 不会向健康 App 写入数据。</string>
+<key>UILaunchScreen</key><dict/>
+</dict></plist>
