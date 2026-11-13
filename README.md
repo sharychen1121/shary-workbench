@@ -1,16 +1,7 @@
 # shary 的工作台
 
-静态个人目标工作台，使用原生 HTML、CSS 和 JavaScript，无后端或第三方依赖。
+个人目标与运动健康工作台。GitHub Pages 提供 HTML/CSS/JavaScript 前端；运动健康自动同步使用单独的 Cloudflare Worker + D1 后端和 iPhone HealthKit 配套 App。
 
-## 本地预览
+任务、目标、复盘与习惯保存在访问者当前浏览器的 localStorage。健康日汇总与训练摘要在用户授权后由 iPhone App 通过 HTTPS 写入 Cloudflare D1；网页通过同步密钥读取。健康同步部署步骤见 [SYNC_SETUP.md](SYNC_SETUP.md)，iPhone 项目位于 [ios/SharyHealthSync.xcodeproj](ios/SharyHealthSync.xcodeproj)。
 
-直接打开 `index.html`。
-
-## 发布到 GitHub Pages
-
-1. 将本文件夹内容推送到 GitHub 仓库的 `main` 分支。
-2. 在仓库设置的 Pages 区域，选择从 `main` 分支根目录发布。
-3. 等待 GitHub Pages 完成部署，然后打开设置页显示的站点 URL。
-
-任务、目标、复盘和习惯记录使用浏览器 `localStorage` 保存。每位访问者的数据都保存在自己的浏览器中；定期用工作台里的 JSON 备份功能导出数据。
-
+GitHub Pages 自动从 main 分支发布静态前端。Worker 与 iPhone App 需要分别配置和部署。
