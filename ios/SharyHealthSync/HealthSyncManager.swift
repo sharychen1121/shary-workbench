@@ -186,6 +186,6 @@ struct WorkoutSummary: Codable {
     }
     enum SyncError: LocalizedError {
         case badURL, serverRejected
-        var errorDescription: String? { self == .badURL ? "Worker 地址无效" : "同步服务未接受数据，请检查地址和密钥" }
+        var errorDescription: String? { switch self { case .badURL: "Worker 地址无效"; case .serverRejected: "同步服务未接受数据，请检查地址和密钥" } }
     }
 }
