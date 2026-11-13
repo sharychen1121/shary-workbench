@@ -1,0 +1,12 @@
+name = "shary-health-sync"
+main = "src/index.ts"
+compatibility_date = "2026-11-13"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "shary-health"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[vars]
+ALLOWED_ORIGIN = "https://sharychen1121.github.io"
