@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fff7fa">
+<title>运动健康 · shary的工作台</title>
+<link rel="stylesheet" href="style.css?v=6"><link rel="stylesheet" href="health-ocr.css?v=1">
+</head>
+<body>
+<div class="shell">
+ <aside class="sidebar">
+  <a class="brand" href="index.html#home"><span class="brand-mark">☀</span><span><b>shary的工作台</b><small>慢慢来，也会到达</small></span></a>
+  <div class="nav-label">工作台</div><nav id="main-nav">
+   <a class="nav-item" href="index.html#home"><i>⌂</i>首页</a><a class="nav-item" href="index.html#daily"><i>☀</i>每日计划</a>
+   <a class="nav-item" href="index.html#calendar"><i>▦</i>日历与日程</a><a class="nav-item" href="index.html#tasks"><i>✓</i>任务管理</a>
+   <a class="nav-item" href="index.html#goals"><i>◎</i>目标与项目</a><a class="nav-item" href="index.html#habits"><i>◉</i>习惯打卡</a><a class="nav-item active" href="health-ocr.html"><i>♥</i>运动健康</a><a class="nav-item" href="index.html#reviews"><i>✎</i>复盘记录</a>
+  </nav>
+  <div class="nav-label nav-lower">管理</div><nav><a class="nav-item" href="index.html#backup"><i>⇧</i>数据备份</a><a class="nav-item" href="index.html#settings"><i>⚙</i>设置</a></nav>
+  <div class="side-note"><span>✧</span><p>把重要的事放在心上，<br>也放进今天的计划里。</p><small>一点一点，向目标靠近</small></div>
+  <div class="profile"><span class="avatar">S</span><span>shary<small>健康记录保存在此浏览器</small></span><b></b></div>
+ </aside>
+ <main class="main">
+  <header class="topbar"><button class="icon-button menu" id="menu-toggle" aria-label="打开导航">☰</button><div class="crumb">shary的工作台 <span>/</span> <strong>运动健康</strong></div><div class="top-actions"><a class="btn" href="index.html#home">返回工作台</a></div></header>
+  <section class="view-root">
+   <div class="heading"><div><div class="eyebrow">SHARY · PERSONAL WORKSPACE</div><h1>运动健康</h1><p>上传 iPhone 健康截图，识别后核对并保存每天的运动记录。</p></div><div class="heading-actions"><label class="btn primary" for="health-image-files">▧ 选择健康截图</label><input id="health-image-files" type="file" accept="image/*" multiple hidden></div></div>
+   <section class="ocr-content" id="health-root"></section>
+   <footer class="footer"><span>☀ shary的工作台</span><span>图片仅在当前浏览器处理</span><span id="ocr-save-state">数据保存在此浏览器</span></footer>
+  </section>
+ </main>
+</div>
+<div class="toast-region" id="toast-region" aria-live="polite"></div>
+<script src="health-ocr.js?v=1"></script>
+</body></html>
