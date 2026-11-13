@@ -62,7 +62,7 @@ struct WorkoutSummary: Codable {
     }
     func restoreStatus() { lastSync = UserDefaults.standard.string(forKey: "healthLastSync") ?? "" }\n    func resumeBackgroundDeliveryIfConfigured() { if !baseURL.isEmpty && !token.isEmpty { enableBackgroundUpdates() } }
     private func enableBackgroundUpdates() {
-        let types: [HKObjectType] = [
+        let types: [HKSampleType] = [
             HKObjectType.quantityType(forIdentifier: .stepCount),
             HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
             HKObjectType.quantityType(forIdentifier: .appleExerciseTime),
@@ -108,25 +108,36 @@ struct WorkoutSummary: Codable {
             let c = calendar.dateComponents([.year,.month,.day], from: date)
             return String(format: "%04d-%02d-%02d", c.year ?? 0,c.month ?? 0,c.day ?? 0)
         }
-        for identifier: HKQuantityTypeIdentifier in [.stepCount,.activeEnergyBurned,.appleExerciseTime,.distanceWalkingRunning,.flightsClimbed,.heartRate] {
+        for identifier: HKQuantityTypeIdentifier in [.stepCount,.activeEnergyBurned,.appleExerciseTime,.distanceWalkingRunning,.flightsClimbed] {
             guard let type = HKObjectType.quantityType(forIdentifier: identifier) else { continue }
-            let samples = await quantitySamples(type, from: first, through: end)
-            for sample in samples {
-                let key = dayKey(sample.startDate)
-                var row = map[key] ?? DailyHealth(date: key)
+            let unit: HKUnit
+            switch identifier {
+            case .stepCount, .flightsClimbed: unit = .count()
+            case .activeEnergyBurned: unit = .kilocalorie()
+            case .appleExerciseTime: unit = .minute()
+            default: unit = .meter()
+            }
+            for (date,value) in await dailyTotals(type, from: first, through: end, unit: unit) {
+                let key=dayKey(date)
+                var row=map[key] ?? DailyHealth(date:key)
                 switch identifier {
-                case .stepCount: row.steps += sample.quantity.doubleValue(for: .count())
-                case .activeEnergyBurned: row.activeEnergyKcal += sample.quantity.doubleValue(for: .kilocalorie())
-                case .appleExerciseTime: row.exerciseMinutes += sample.quantity.doubleValue(for: .minute())
-                case .distanceWalkingRunning: row.distanceKm += sample.quantity.doubleValue(for: .meter()) / 1000
-                case .flightsClimbed: row.flights += sample.quantity.doubleValue(for: .count())
-                case .heartRate:
-                    let bpm = sample.quantity.doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
-                    row.heartRateMin = row.heartRateMin == 0 ? bpm : min(row.heartRateMin,bpm)
-                    row.heartRateMax = max(row.heartRateMax,bpm)
+                case .stepCount: row.steps=value
+                case .activeEnergyBurned: row.activeEnergyKcal=value
+                case .appleExerciseTime: row.exerciseMinutes=value
+                case .distanceWalkingRunning: row.distanceKm=value/1000
+                case .flightsClimbed: row.flights=value
                 default: break
                 }
-                map[key] = row
+                map[key]=row
+            }
+        }
+        if let heartType = HKObjectType.quantityType(forIdentifier: .heartRate) {
+            for sample in await quantitySamples(heartType, from: first, through: end) {
+                let key=dayKey(sample.startDate)
+                var row=map[key] ?? DailyHealth(date:key)
+                let bpm=sample.quantity.doubleValue(for:HKUnit.count().unitDivided(by:.minute()))
+                row.heartRateMin=row.heartRateMin==0 ? bpm : min(row.heartRateMin,bpm)
+                row.heartRateMax=max(row.heartRateMax,bpm);map[key]=row
             }
         }
         if let stand = HKObjectType.categoryType(forIdentifier: .appleStandHour) {
@@ -146,6 +157,20 @@ struct WorkoutSummary: Codable {
             map[key] = row
         }
         return map.values.sorted { $0.date < $1.date }
+    }
+    private func dailyTotals(_ type: HKQuantityType, from start: Date, through end: Date, unit: HKUnit) async -> [(Date,Double)] {
+        let predicate=HKQuery.predicateForSamples(withStart:start,end:end,options:.strictStartDate)
+        let query=HKStatisticsCollectionQuery(quantityType:type,quantitySamplePredicate:predicate,options:.cumulativeSum,anchorDate:start,intervalComponents:DateComponents(day:1))
+        return await withCheckedContinuation { continuation in
+            query.initialResultsHandler={ _,collection,_ in
+                var values:[(Date,Double)]=[]
+                collection?.enumerateStatistics(from:start,to:end){ statistics,_ in
+                    if let quantity=statistics.sumQuantity(){values.append((statistics.startDate,quantity.doubleValue(for:unit)))}
+                }
+                continuation.resume(returning:values)
+            }
+            store.execute(query)
+        }
     }
     private func quantitySamples(_ type: HKQuantityType, from start: Date, through end: Date) async -> [HKQuantitySample] {
         let p = HKQuery.predicateForSamples(withStart: start, end: end, options: .strictStartDate)
