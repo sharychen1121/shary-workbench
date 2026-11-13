@@ -60,7 +60,7 @@ struct WorkoutSummary: Codable {
             status = "已同步 · " + lastSync
         } catch { status = "同步失败：" + error.localizedDescription }
     }
-    func restoreStatus() { lastSync = UserDefaults.standard.string(forKey: "healthLastSync") ?? "" }
+    func restoreStatus() { lastSync = UserDefaults.standard.string(forKey: "healthLastSync") ?? "" }\n    func resumeBackgroundDeliveryIfConfigured() { if !baseURL.isEmpty && !token.isEmpty { enableBackgroundUpdates() } }
     private func enableBackgroundUpdates() {
         let types: [HKObjectType] = [
             HKObjectType.quantityType(forIdentifier: .stepCount),
@@ -142,7 +142,7 @@ struct WorkoutSummary: Codable {
             let energy = workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0
             let distance = workout.totalDistance?.doubleValue(for: .meter()) ?? 0
             row.workouts.append(WorkoutSummary(name: Self.activityName(workout.workoutActivityType), start: ISO8601DateFormatter().string(from: workout.startDate), minutes: minutes, activeEnergyKcal: energy, distanceKm: distance / 1000))
-            row.exerciseMinutes = max(row.exerciseMinutes, minutes)
+            row.exerciseMinutes = max(row.exerciseMinutes, row.workouts.reduce(0) { $0 + $1.minutes })
             map[key] = row
         }
         return map.values.sorted { $0.date < $1.date }
