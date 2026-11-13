@@ -31,8 +31,6 @@ struct WorkoutSummary: Codable {
     private let tokenKey = "healthSyncToken"
     private var observersInstalled = false
     private var standHourKeys = Set<String>()
-    private var observersInstalled = false
-    private var standHourKeys = Set<String>()
     var baseURL: String {
         get { UserDefaults.standard.string(forKey: "healthSyncBaseURL") ?? "" }
         set { UserDefaults.standard.set(newValue, forKey: "healthSyncBaseURL") }
