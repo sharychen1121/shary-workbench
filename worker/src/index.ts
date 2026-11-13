@@ -1,8 +1,8 @@
 export interface Env { DB: D1Database; HEALTH_SYNC_TOKEN: string; ALLOWED_ORIGIN?: string; }
 const json=(body:unknown,status=200,origin="*")=>new Response(JSON.stringify(body),{status,headers:{"content-type":"application/json; charset=utf-8","cache-control":"no-store","access-control-allow-origin":origin,"access-control-allow-methods":"GET,POST,OPTIONS","access-control-allow-headers":"authorization,content-type","vary":"Origin","x-content-type-options":"nosniff"}});
-const dayPattern=/^\\d{4}-\\d{2}-\\d{2}$/;
+const dayPattern=/^\d{4}-\d{2}-\d{2}$/;
 const numberKeys=["activeEnergyKcal","exerciseMinutes","standHours","steps","distanceKm","flights","heartRateMin","heartRateMax"];
-function authorized(req:Request,env:Env){const token=(req.headers.get("authorization")||"").replace(/^Bearer\\s+/i,"");return !!env.HEALTH_SYNC_TOKEN&&token===env.HEALTH_SYNC_TOKEN;}
+function authorized(req:Request,env:Env){const token=(req.headers.get("authorization")||"").replace(/^Bearer\s+/i,"");return !!env.HEALTH_SYNC_TOKEN&&token===env.HEALTH_SYNC_TOKEN;}
 export default {async fetch(req:Request,env:Env):Promise<Response>{
  const origin=req.headers.get("Origin")||"",allow=env.ALLOWED_ORIGIN||"https://sharychen1121.github.io";
  if(origin&&origin!==allow)return json({error:"origin_not_allowed"},403,allow);
