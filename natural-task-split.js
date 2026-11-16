@@ -1,15 +1,18 @@
 (()=>{"use strict";
 const KEY="shiguang.workspace.v1",esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function splitText(raw){
- let s=String(raw||"").trim().replace(/[。！？!?；;]+/g,"、").replace(/^(?:我)?(?:今天|今日)(?:要|想|准备|计划|安排|需要)?/,"").replace(/^(?:我)?(?:要|想|准备|计划|安排|需要)/,"").trim();
- s=s.replace(/\s*(?:然后|接着|并且|以及|还有|同时|再去|再|和|并|、|，|,|\+|\band\b)\s*/gi,"、");
- return [...new Set(s.split("、").map(x=>x.trim().replace(/^(?:去|做一下|完成一下)\s*/,"去").replace(/^(?:去去)/,"去")).filter(x=>x.length>0))];
+ let s=String(raw||"").replace(/\r\n?/g,"\n").trim();
+ s=s.replace(/^(?:我)?(?:今天|今日)(?:要|想|准备|计划|安排|需要)?\s*/,"").replace(/^(?:我)?(?:要|想|准备|计划|安排|需要)\s*/,"");
+ const parts=s.split(/\n+|[、，,；;。！？!?]+|\s{2,}|\s*(?:然后|接着|并且|以及|还有|同时|再去|再加上|并|和|与|及)\s*/g)
+  .map(x=>x.trim().replace(/^(?:然后|接着|并且|以及|还有|同时|再去|再加上|并|和|与|及)\s*/,"").replace(/^(?:今天|今日)\s*/,""))
+  .filter(x=>x.length>0);
+ return parts.filter((x,i)=>parts.indexOf(x)===i);
 }
 function attach(){
  const root=document.querySelector("#view-root");if(!root||!location.hash.startsWith("#daily"))return;
  const heading=root.querySelector(".heading");if(!heading||root.querySelector("#natural-task-box"))return;
  const box=document.createElement("section");box.id="natural-task-box";box.className="card";box.style.cssText="margin:0 0 18px;padding:18px";
- box.innerHTML='<div class="card-head"><div><h2>一句话拆分任务</h2><p>输入今天要做的事，系统会拆成任务供你确认。</p></div></div><div style="display:flex;gap:10px;flex-wrap:wrap"><textarea id="natural-task-input" class="review-text" style="min-height:56px;flex:1;min-width:240px" placeholder="例如：今天要去健身和学习"></textarea><button class="btn primary" id="natural-task-split">拆分任务</button></div><div id="natural-task-preview"></div>';
+ box.innerHTML='<div class="card-head"><div><h2>任务拆分</h2><p>可以用换行、标点、多个空格或“然后、还有、和”等连接词分隔任务。</p></div></div><div style="display:flex;gap:10px;flex-wrap:wrap"><textarea id="natural-task-input" class="review-text" style="min-height:72px;flex:1;min-width:240px" placeholder="例如：\nPPT、视频还有报告\n让 AI 总结这个项目"></textarea><button class="btn primary" id="natural-task-split">拆分任务</button></div><div id="natural-task-preview"></div>';
  heading.insertAdjacentElement("afterend",box);
  box.querySelector("#natural-task-split").addEventListener("click",()=>{
   const tasks=splitText(box.querySelector("#natural-task-input").value),preview=box.querySelector("#natural-task-preview");
